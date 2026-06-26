@@ -1,5 +1,5 @@
-import numpy as np
-import matplotlib.pyplot as plt
+import numpy as np#libreria encargada de realizar los calculos correspondientes para las señales
+import matplotlib.pyplot as plt#esta libreria se encarga de graficar y visualizarlas 
 
 
 #Crear las lineas de la grafica
@@ -16,8 +16,6 @@ escalon = np.where(t >= 0,1,0)
 #Senoidal
 f=5 # frecuencia 
 senoidal = np.sin(2*np.pi*f*t)
-
-
 
 
 #Muestra las 3 graficas 
@@ -44,22 +42,26 @@ ax[2].set_xlabel("Tiempo")
 ax[2].set_ylabel("Amplitud")
 ax[2].grid(True)
 
-
+#mostrar graficas
 plt.tight_layout()
 plt.show()
 
 
 #FFT para graficar las 3 en una sola ventana
+#Tranformada de Fourier con fft, nos ayuda a convertir la señal del dominio del tiempo a dominio de frecuencia
+#Usamos fftshift para centrar el espectro en 0 y visualizarlo de mejor forma
 fft_pulso = np.fft.fftshift(np.fft.fft(pulso))
 fft_escalon = np.fft.fftshift(np.fft.fft(escalon))
 fft_senoidal = np.fft.fftshift(np.fft.fft(senoidal))
 
 #magnitudes de las 3
+#La magnitud nos indica que frecuencias estan presentes y su intensidad
 magnitud_pulso = np.abs(fft_pulso)
 magnitud_escalon = np.abs(fft_escalon)
 magnitud_senoidal=np.abs(fft_senoidal)
 
-#fases de las 3 
+#fase de las 3 
+#La fase indica el desplazamiento temporal de cada componente de frecuencia en la señal
 fase_pulso = np.angle(fft_pulso)
 fase_escalon = np.angle(fft_escalon)
 fase_senoidal = np.angle(fft_senoidal)
@@ -88,6 +90,7 @@ ax2[2].set_xlabel("Frecuencia")
 ax2[2].set_ylabel("Magnitud")
 ax2[2].grid(True)
 
+#mostrar graficas
 plt.tight_layout()
 plt.show()
 
@@ -112,5 +115,7 @@ ax3[2].set_xlabel("Frecuencia")
 ax3[2].set_ylabel("Fase")
 ax3[2].grid(True)
 
+
+#mostrar graficas
 plt.tight_layout()
 plt.show()
